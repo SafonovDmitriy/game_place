@@ -1,0 +1,30 @@
+import { Box, useMediaQuery } from "@material-ui/core";
+import { Avatar } from "@mui/material";
+import clsx from "clsx";
+import React, { FC } from "react";
+import { minWidthWindow } from "../..";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { isUserSelector } from "../../redux/selectors";
+import useStyles from "./HeaderStyles";
+import SignInButtonWithModal from "./SignInButtonWithModal/SignInButtonWithModal";
+
+interface IHeaderProps {}
+const Header: FC<IHeaderProps> = () => {
+  const classes = useStyles();
+
+  const matches = useMediaQuery<boolean>(`(min-width:${minWidthWindow}px)`);
+  const isUser = useTypedSelector(isUserSelector);
+
+  return (
+    <Box
+      className={clsx(
+        classes.header,
+        matches ? classes.sideBarOpen : classes.sideBarClose
+      )}
+    >
+      {isUser ? <Avatar /> : <SignInButtonWithModal />}
+    </Box>
+  );
+};
+
+export default Header;
