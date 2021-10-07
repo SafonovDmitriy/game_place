@@ -11,6 +11,8 @@ export default makeStyles({
     display: "flex",
     flexDirection: "column",
     gap: 10,
+    minWidth: 300,
+    padding: 15,
   },
   flipModeBtn: {
     backgroundColor: "transparent",

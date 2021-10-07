@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api", router);
-
+app.use("/img", express.static("img"));
 const start = () => {
   try {
     conectToDataBase();

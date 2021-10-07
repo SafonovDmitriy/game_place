@@ -1,5 +1,6 @@
 /* eslint-disable  */
 import axios, { AxiosInstance, CancelTokenSource } from "axios";
+import { IForm } from "../redux/actions/user/IUser";
 
 export const instance: AxiosInstance = axios.create({
   baseURL: process.env.REACT_APP_URL_SERVER,
@@ -49,3 +50,16 @@ const createCancelToken = () => {
 //     cancelToken: instanceWithToken(),
 //   });
 export const fetchUserApi = () => request({ url: "/api/users" });
+export const signInApi = (form: IForm) =>
+  request({
+    url: "/api/auth/authorization",
+    props: {
+      params: form,
+    },
+  });
+export const signUpApi = (form: IForm) =>
+  request({
+    url: "/api/auth/registration",
+    method: "post",
+    props: form,
+  });

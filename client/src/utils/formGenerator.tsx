@@ -14,11 +14,11 @@ interface ISubmite {
   [key: string]: string;
 }
 interface IAny {
-  [key: string]: string | boolean;
+  [key: string]: string | boolean | number;
 }
 
 interface IValidationFunc {
-  func: (text: string | boolean, any: IAny) => boolean;
+  func: Function;
   message: string;
   any?: IAny;
 }
@@ -27,7 +27,7 @@ export interface IFormItem {
   value: string | boolean;
   group?: number;
   type?: EFormGeneratorTypes;
-  validationFunc?: [IValidationFunc];
+  validationFunc?: IValidationFunc[];
   any?: IAny;
 }
 
@@ -113,8 +113,11 @@ const formGenerator = ({
     let _errors: IError = { ...error };
     for (const field of _form) {
       if (field.validationFunc) {
-        for (const valid of field?.validationFunc) {
-          if (valid.func(field.value, { ...valid?.any })) {
+        for (const valid of field.validationFunc) {
+          console.log({ VALUE: field.value });
+          const isValid =
+            !!valid.func && valid.func(field.value, { ...valid?.any });
+          if (isValid) {
             Object.assign(_errors, { [field.name]: valid.message });
             break;
           } else {
