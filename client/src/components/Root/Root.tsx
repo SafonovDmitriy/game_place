@@ -4,7 +4,7 @@ import React from "react";
 import { Route, Switch } from "react-router";
 import { HomePage } from "..";
 import { minWidthWindow } from "../..";
-import { HOME_PAGE } from "../../utils/rootPath";
+import { HOME_PAGE } from "../../utils/constants/rootPath";
 import useStyles from "./RootStyle";
 const Root = () => {
   const classes = useStyles();

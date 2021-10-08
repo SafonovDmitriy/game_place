@@ -1,7 +1,5 @@
 const { User } = require("../models");
 
-const Token = require("../utils/Token");
-
 class UserController {
   async getUser(req, res) {
     const { _id } = req.body;
@@ -16,6 +14,14 @@ class UserController {
       balance: user.balance,
     };
     res.status(200).json({ user: _user });
+  }
+  async logOut(req, res) {
+    res
+      .cookie("token", "", {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000),
+      })
+      .send();
   }
 }
 

@@ -16,4 +16,10 @@ export default makeStyles({
   sideBarClose: {
     marginLeft: 60,
   },
+
+  balanceFieldWrapper: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 10,
+  },
 });

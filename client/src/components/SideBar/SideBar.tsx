@@ -13,7 +13,7 @@ import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { minWidthWindow } from "../..";
 import { logo } from "../../img";
-import { HOME_PAGE } from "../../utils/rootPath";
+import { HOME_PAGE } from "../../utils/constants/rootPath";
 import useStyles from "./SideBarStyle";
 
 interface IMenuItem {

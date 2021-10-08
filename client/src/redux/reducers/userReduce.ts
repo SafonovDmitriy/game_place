@@ -1,7 +1,12 @@
 import { IUserAction, IUserReduce } from "../actions/user/IUser";
 import { userTypeAction } from "../actions/user/userActions";
 
-const initialStore: IUserReduce = { loading: false, data: {}, error: null };
+const initialStore: IUserReduce = {
+  loading: false,
+  data: {},
+  error: null,
+  isAuthError: null,
+};
 
 const userReduce = (
   state: IUserReduce = initialStore,
@@ -23,6 +28,16 @@ const userReduce = (
       return {
         ...state,
         error: action.payload,
+      };
+    case userTypeAction.SET_IS_AUTH_ERROR:
+      return {
+        ...state,
+        isAuthError: action.payload,
+      };
+    case userTypeAction.CLEAR_DATA:
+      return {
+        ...state,
+        data: initialStore.data,
       };
 
     default:

@@ -114,7 +114,6 @@ const formGenerator = ({
     for (const field of _form) {
       if (field.validationFunc) {
         for (const valid of field.validationFunc) {
-          console.log({ VALUE: field.value });
           const isValid =
             !!valid.func && valid.func(field.value, { ...valid?.any });
           if (isValid) {

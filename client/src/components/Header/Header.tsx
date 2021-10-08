@@ -1,10 +1,10 @@
 import { Box, useMediaQuery } from "@material-ui/core";
-import { Avatar } from "@mui/material";
 import clsx from "clsx";
 import React, { FC } from "react";
 import { minWidthWindow } from "../..";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { isUserSelector } from "../../redux/selectors";
+import { Avatar, BalanceField } from "../UI";
 import useStyles from "./HeaderStyles";
 import SignInButtonWithModal from "./SignInButtonWithModal/SignInButtonWithModal";
 
@@ -22,7 +22,14 @@ const Header: FC<IHeaderProps> = () => {
         matches ? classes.sideBarOpen : classes.sideBarClose
       )}
     >
-      {isUser ? <Avatar /> : <SignInButtonWithModal />}
+      {isUser ? (
+        <Box className={classes.balanceFieldWrapper}>
+          <BalanceField />
+          <Avatar />
+        </Box>
+      ) : (
+        <SignInButtonWithModal />
+      )}
     </Box>
   );
 };

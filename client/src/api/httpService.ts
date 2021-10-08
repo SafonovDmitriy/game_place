@@ -50,6 +50,7 @@ const createCancelToken = () => {
 //     cancelToken: instanceWithToken(),
 //   });
 export const fetchUserApi = () => request({ url: "/api/users" });
+export const logOutApi = () => request({ url: "/api/users/logout" });
 export const signInApi = (form: IForm) =>
   request({
     url: "/api/auth/authorization",

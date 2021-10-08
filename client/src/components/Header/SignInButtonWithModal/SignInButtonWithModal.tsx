@@ -1,6 +1,6 @@
 import { Box } from "@mui/system";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../hooks/useModal";
 import { useToggle } from "../../../hooks/useToggle";
 import { IForm } from "../../../redux/actions/user/IUser";
@@ -8,6 +8,10 @@ import {
   signInAuth,
   signUpAuth,
 } from "../../../redux/actions/user/userActions";
+import {
+  isAuthErrorSelector,
+  userFetchErrorSelector,
+} from "../../../redux/selectors";
 import formGenerator, { IFormItem } from "../../../utils/formGenerator";
 import { minlength, required, validateEmail } from "../../../utils/validation";
 import { Button, Modal } from "../../UI";
@@ -15,7 +19,9 @@ import useStyles from "./SignInButtonWithModalStyle";
 const SignInButtonWithModal = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const isOpenModalSignIn = useModal(false);
+  const userFetchError = useSelector(userFetchErrorSelector);
+  const isAuthError = useSelector(isAuthErrorSelector);
+  const isOpenModalSignIn = useModal(isAuthError);
   const [signInMode, flipSignInMode] = useToggle(true);
   const signIn = () => {
     isOpenModalSignIn.onClose();
@@ -46,8 +52,6 @@ const SignInButtonWithModal = () => {
   ]);
   const [error, setError] = useState({});
   const onSubmit = (form: IForm) => {
-    console.log(`form`, form);
-    console.log(`signInMode`, signInMode);
     if (signInMode) {
       dispatch(signInAuth(form));
     } else {
@@ -69,6 +73,7 @@ const SignInButtonWithModal = () => {
               setError,
               submitText: signInMode ? "Sign In" : "Sign Up",
               className: classes.form,
+              formError: userFetchError,
             })}
             <Button
               onClick={flipSignInMode}
